@@ -3,9 +3,11 @@ PROJECT(2023-12-04)
 
 FIND_PACKAGE(Threads REQUIRED)
 
+SET(CMAKE_CXX_STANDARD 20)
+
 if (${CMAKE_COMPILER_IS_GNUCC})
    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -g3 -Wall -Werror")
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -O0 -g3 -Wall -Werror")
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g3 -Wall -Werror")
 endif()
 
 ADD_SUBDIRECTORY(toolcase)
