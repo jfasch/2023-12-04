@@ -4,7 +4,8 @@
 #include <cstddef>
 using namespace std;
 
-void print_container(auto begin, auto end)     // <--- Abbreviated Function Template
+template <typename Iterator>
+void print_container(Iterator begin, Iterator end)
 {
     for (auto run = begin; run < end; ++run)
         cout << *run << endl;

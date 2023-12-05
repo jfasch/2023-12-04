@@ -1,8 +1,16 @@
+SET(FILES 
+
+  sensor-mock-basic.cpp
+)
+
+IF (UNIX)
+  SET(FILES ${FILES} sensor-w1-suite.cpp)
+ENDIF()
+
 ADD_EXECUTABLE(
   test-suite
 
-  sensor-mock-basic.cpp
-  sensor-w1-suite.cpp
+  ${FILES}
 )
 
 TARGET_LINK_LIBRARIES(

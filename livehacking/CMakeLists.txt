@@ -8,3 +8,5 @@ ADD_EXECUTABLE(auto auto.cpp)
 ADD_EXECUTABLE(class-layout class-layout.cpp)
 #ADD_EXECUTABLE(variant variant.cpp)
 ADD_EXECUTABLE(intro intro.cpp)
+
+ADD_EXECUTABLE(storage storage.cpp)
