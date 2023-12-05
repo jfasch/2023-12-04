@@ -14,3 +14,6 @@ ADD_EXECUTABLE(intro intro.cpp)
 TARGET_LINK_LIBRARIES(intro Threads::Threads)
 
 ADD_EXECUTABLE(storage storage.cpp)
+ADD_EXECUTABLE(oo oo.cpp)
+ADD_EXECUTABLE(implementation-inheritance-NO implementation-inheritance-NO.cpp)
+#ADD_EXECUTABLE(kochtopf kochtopf.cpp)
