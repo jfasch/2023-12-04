@@ -57,6 +57,10 @@ TEST_F(w1_sensor_suite, read_sensor)
     change_temperature(42);                    // <--- change temperature
     temperature = sensor.get_temperature();    // <--- read temperature
     ASSERT_FLOAT_EQ(temperature, 42);
+
+    change_temperature(36);                    // <--- change temperature
+    temperature = sensor.get_temperature();    // <--- read temperature
+    ASSERT_FLOAT_EQ(temperature, 36);
 }
 
 TEST_F(w1_sensor_suite, no_decimal_places_lost)

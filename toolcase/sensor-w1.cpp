@@ -21,6 +21,10 @@ W1Sensor::~W1Sensor()
 
 double W1Sensor::get_temperature()
 { 
+    off_t pos = ::lseek(_fd, 0, SEEK_SET);
+    if (pos == -1)
+        throw std::system_error(errno, std::generic_category(), "read");
+
     char buffer[32];
     ssize_t nread = ::read(_fd, buffer, sizeof(buffer));
     if (nread == -1)
