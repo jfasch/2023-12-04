@@ -64,6 +64,8 @@ Control* CloudKochtopf::get_control(const std::string& name)
 
 void CloudKochtopf::_start_background_thread()
 {
+    _running = true;
+
     _thread = std::make_unique<std::thread>(
         [this]()
         {
