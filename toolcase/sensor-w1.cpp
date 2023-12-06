@@ -14,6 +14,23 @@ W1Sensor::W1Sensor(const std::string& filename)
         throw std::system_error(errno, std::generic_category(), "open");
 }
 
+W1Sensor::W1Sensor(W1Sensor&& rhs)
+{
+    _fd = rhs._fd;
+    rhs._fd = -1;
+}
+
+W1Sensor& W1Sensor::operator=(W1Sensor&& rhs)
+{
+    if (this == &rhs)
+        return *this;
+    if (_fd != -1)
+        ::close(_fd);
+    _fd = rhs._fd;
+    rhs._fd = -1;
+    return *this;
+}
+
 W1Sensor::~W1Sensor()
 {
     ::close(_fd);
@@ -23,7 +40,7 @@ double W1Sensor::get_temperature()
 { 
     off_t pos = ::lseek(_fd, 0, SEEK_SET);
     if (pos == -1)
-        throw std::system_error(errno, std::generic_category(), "read");
+        throw std::system_error(errno, std::generic_category(), "lseek");
 
     char buffer[32];
     ssize_t nread = ::read(_fd, buffer, sizeof(buffer));
