@@ -58,10 +58,19 @@ public:
     }
 };
 
+class Derived3Derived : public Derived3
+{
+public:
+    void method() const override
+    {
+        std::cout << "Derived3Derived::method()" << std::endl;
+    }
+};
+
 int main()
 {
     // setup phase
-    Interface* objects[] = {new Derived1("hallo"), new Derived2("hello"), new Derived3()};
+    Interface* objects[] = {new Derived1("hallo"), new Derived2("hello"), new Derived3(), new Derived3Derived()};
 
     // runtime phase
     for (Interface* objp: objects)

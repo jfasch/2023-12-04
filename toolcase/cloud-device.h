@@ -14,6 +14,7 @@ class TemperatureControl : public Control
 public:
     virtual double get_target_temperature() = 0;
     virtual void set_target_temperature(double) = 0;
+    virtual double get_current_temperature() = 0;
 };
 
 class PowerControl : public Control

@@ -11,7 +11,7 @@
 
 class CloudKochtopf;
 
-class KochtopfPowerControl : public PowerControl
+class KochtopfPowerControl final : public PowerControl
 {
 public:
     KochtopfPowerControl(CloudKochtopf* component);
@@ -21,12 +21,13 @@ private:
     CloudKochtopf* _component;
 };
 
-class KochtopfTemperatureControl : public TemperatureControl
+class KochtopfTemperatureControl final : public TemperatureControl
 {
 public:
     KochtopfTemperatureControl(CloudKochtopf* component);
     double get_target_temperature() override;
     void set_target_temperature(double t) override;
+    double get_current_temperature() override;
 private:
     CloudKochtopf* _component;
 };
@@ -49,6 +50,8 @@ private:
     DeviceInfo _info;
     KochtopfPowerControl _power_ctl;
     KochtopfTemperatureControl _temperature_ctl;
+
+    std::shared_ptr<Sensor> _sensor;
 
 private:
     void _start_background_thread();

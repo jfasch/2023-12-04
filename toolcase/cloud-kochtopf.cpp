@@ -32,6 +32,11 @@ void KochtopfTemperatureControl::set_target_temperature(double t)
     return _component->_topf.set_target_temperature(t);
 }
 
+double KochtopfTemperatureControl::get_current_temperature()
+{
+    return _component->_sensor->get_temperature();
+}
+
 // -----------------------------------------------------------------------------
 CloudKochtopf::CloudKochtopf(int id, 
                              const std::shared_ptr<Sensor>& sensor, 
@@ -44,6 +49,7 @@ CloudKochtopf::CloudKochtopf(int id,
     }),
   _power_ctl(this),
   _temperature_ctl(this),
+  _sensor(sensor),
   _interval_milliseconds(interval_milliseconds)
 {}
 

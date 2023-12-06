@@ -59,7 +59,6 @@ struct cloud_kochtopf_suite : public ::testing::Test
 
 TEST_F(cloud_kochtopf_suite, basic_usage)
 {
-
     temperature_control->set_target_temperature(91);
 
     // expecting the switch turned on really soon now
