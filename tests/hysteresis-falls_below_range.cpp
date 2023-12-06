@@ -12,10 +12,10 @@ TEST(hysteresis_suite, falls_below_range)
                     20.1, 30.4);                       // <--- initially within range
 
     hyst.check();
-    ASSERT_FALSE(switcH->state());
+    ASSERT_FALSE(switcH->get_state());
 
     sensor->set_temperature(20.0);                      // <--- falls below range
 
     hyst.check();
-    ASSERT_TRUE(switcH->state());
+    ASSERT_TRUE(switcH->get_state());
 }

@@ -10,6 +10,7 @@ SET(FILES
   hysteresis-set-range.cpp
 
   kochtopf-suite.cpp
+  cloud-kochtopf-suite.cpp
 )
 
 IF (UNIX)

@@ -11,24 +11,24 @@ TEST(hysteresis_suite, set_range)
     Hysteresis hyst(sensor, switcH, 
                     20.1, 30.4);
     hyst.check();
-    ASSERT_FALSE(switcH->state());
+    ASSERT_FALSE(switcH->get_state());
 
     hyst.set_range(0,2);
     hyst.check();
-    ASSERT_FALSE(switcH->state());
+    ASSERT_FALSE(switcH->get_state());
 
     sensor->set_temperature(-2);
 
     hyst.check();
-    ASSERT_TRUE(switcH->state());
+    ASSERT_TRUE(switcH->get_state());
 
     hyst.set_range(100,102);
     hyst.check();
-    ASSERT_TRUE(switcH->state());
+    ASSERT_TRUE(switcH->get_state());
     sensor->set_temperature(90);
     hyst.check();
-    ASSERT_TRUE(switcH->state());
+    ASSERT_TRUE(switcH->get_state());
     sensor->set_temperature(105);
     hyst.check();
-    ASSERT_FALSE(switcH->state());
+    ASSERT_FALSE(switcH->get_state());
 }

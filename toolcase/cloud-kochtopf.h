@@ -3,73 +3,62 @@
 #include "kochtopf.h"
 #include "cloud-device.h"
 
+#include <atomic>
+#include <memory>
+#include <thread>
+#include <chrono>
+
+
+class CloudKochtopf;
+
 class KochtopfPowerControl : public PowerControl
 {
 public:
-    KochtopfPowerControl(Kochtopf* kt) : _kt(kt) {}
-    void set_state(bool s) override
-    {
-        if (s == true)
-            _kt->on();
-        else
-            _kt->off();
-    }
-    bool get_state() override
-    {
-        return _kt->is_on();
-    }
+    KochtopfPowerControl(CloudKochtopf* component);
+    void start() override;
+    void stop() override;
 private:
-    Kochtopf* _kt;
+    CloudKochtopf* _component;
 };
 
 class KochtopfTemperatureControl : public TemperatureControl
 {
 public:
-    KochtopfTemperatureControl(Kochtopf* kt) : _kt(kt) {}
-
-    double get_temperature() override
-    {
-        return _kt->get_temperature();
-    }
-    void set_temperature(double t) override
-    {
-        _kt->set_temperature(t);
-    }
-
+    KochtopfTemperatureControl(CloudKochtopf* component);
+    double get_target_temperature() override;
+    void set_target_temperature(double t) override;
 private:
-    Kochtopf* _kt;
+    CloudKochtopf* _component;
 };
 
 class CloudKochtopf : public CloudDevice
 {
 public:
-    CloudKochtopf(int id, Sensor* sensor, Switch* switcH)
-    : _kochtopf(sensor, switcH),
-      _info(id, {
-            {"Temperaturregler", TEMPERATURE_CONTROL},
-            {"EinAusSchalter", POWER_CONTROL},
-        }),
-      _power_ctl(&_kochtopf),
-      _temperature_ctl(&_kochtopf)
-    {}
+    CloudKochtopf(
+        int id, 
+        const std::shared_ptr<Sensor>& sensor, 
+        const std::shared_ptr<Switch>& switcH,
+        int interval_milliseconds
+    );
 
-    const DeviceInfo* get_info() override
-    {
-        return &_info;
-    }
-    Control* get_control(const std::string& name) override
-    {
-        if (name == "Temperaturregler")
-            return &_temperature_ctl;
-        else if (name == "EinAusSchalter")
-            return &_power_ctl;
-        else
-            throw std::runtime_error("nix control");
-    }
+    const DeviceInfo* get_info() override;
+    Control* get_control(const std::string& name) override;
 
 private:
     Kochtopf _topf;
     DeviceInfo _info;
     KochtopfPowerControl _power_ctl;
     KochtopfTemperatureControl _temperature_ctl;
+
+private:
+    void _start_background_thread();
+    void _stop_background_thread();
+
+    std::unique_ptr<std::thread> _thread;
+    std::atomic<bool> _running;
+    int _interval_milliseconds;
+
+private:
+   friend class KochtopfTemperatureControl;
+   friend class KochtopfPowerControl;
 };

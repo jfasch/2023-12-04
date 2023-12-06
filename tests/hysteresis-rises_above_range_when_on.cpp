@@ -14,10 +14,10 @@ TEST(hysteresis_suite, rises_above_range_when_on)
                                                        //      on after next check()
 
     hyst.check();
-    ASSERT_TRUE(switcH->state());
+    ASSERT_TRUE(switcH->get_state());
 
     sensor->set_temperature(35);                        // <--- rises above range
 
     hyst.check();
-    ASSERT_FALSE(switcH->state());
+    ASSERT_FALSE(switcH->get_state());
 }

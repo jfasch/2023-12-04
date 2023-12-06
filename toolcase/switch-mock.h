@@ -7,7 +7,7 @@ class MockSwitch : public Switch
 {
 public:
     MockSwitch(bool initial_state);
-    bool state() const { return _state; }
+    bool get_state() override;
     void set_state(bool state) override;
 private:
     bool _state;

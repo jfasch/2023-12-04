@@ -11,8 +11,9 @@ TEST(kochtopf_suite, basic)
     auto switcH = std::make_shared<MockSwitch>(false);
 
     Kochtopf k(sensor, switcH, /*target temperature*/92.1);
+    ASSERT_FLOAT_EQ(k.get_target_temperature(), 92.1);
     
     k.check();
 
-    ASSERT_TRUE(switcH->state());
+    ASSERT_TRUE(switcH->get_state());
 }

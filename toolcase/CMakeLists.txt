@@ -8,6 +8,12 @@ set(FILES
 
   hysteresis.h
   hysteresis.cpp
+
+  kochtopf.h
+  kochtopf.cpp
+
+  cloud-kochtopf.h
+  cloud-kochtopf.cpp
 )
 
 IF (UNIX)

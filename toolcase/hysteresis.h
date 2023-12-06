@@ -15,6 +15,9 @@ public:
     void check();
     void set_range(double low, double high);
 
+    double low() const { return _low; }
+    double high() const { return _high; }
+
 private:
     std::shared_ptr<Sensor> _sensor;
     std::shared_ptr<Switch> _switch;

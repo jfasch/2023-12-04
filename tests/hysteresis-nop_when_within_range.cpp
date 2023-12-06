@@ -11,5 +11,5 @@ TEST(hysteresis_suite, nop_when_within_range)
     Hysteresis hyst(sensor, switcH, 20.1, 30.4);
 
     hyst.check();                                      // <--- sees sensor well within range
-    ASSERT_FALSE(switcH->state());
+    ASSERT_FALSE(switcH->get_state());
 }
