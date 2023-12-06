@@ -5,17 +5,17 @@
 
 TEST(hysteresis_suite, falls_below_range)
 {
-    MockSensor sensor(30.2);
-    MockSwitch switcH(false);
+    auto sensor = std::make_shared<MockSensor>(30.2);
+    auto switcH = std::make_shared<MockSwitch>(false);
 
-    Hysteresis hyst(&sensor, &switcH, 
+    Hysteresis hyst(sensor, switcH, 
                     20.1, 30.4);                       // <--- initially within range
 
     hyst.check();
-    ASSERT_FALSE(switcH.state());
+    ASSERT_FALSE(switcH->state());
 
-    sensor.set_temperature(20.0);                      // <--- falls below range
+    sensor->set_temperature(20.0);                      // <--- falls below range
 
     hyst.check();
-    ASSERT_TRUE(switcH.state());
+    ASSERT_TRUE(switcH->state());
 }

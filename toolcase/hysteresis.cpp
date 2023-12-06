@@ -1,10 +1,9 @@
 #include "hysteresis.h"
 
 
-
 Hysteresis::Hysteresis(
-    Sensor* sensor, 
-    Switch* switcH, 
+    const std::shared_ptr<Sensor>& sensor, 
+    const std::shared_ptr<Switch>& switcH, 
     double low, 
     double high)
 : _sensor(sensor),

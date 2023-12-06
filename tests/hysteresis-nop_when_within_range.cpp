@@ -5,11 +5,11 @@
 
 TEST(hysteresis_suite, nop_when_within_range)
 {
-    MockSensor sensor(30.2);
-    MockSwitch switcH(false);
+    auto sensor = std::make_shared<MockSensor>(30.2);
+    auto switcH = std::make_shared<MockSwitch>(false);
 
-    Hysteresis hyst(&sensor, &switcH, 20.1, 30.4);
+    Hysteresis hyst(sensor, switcH, 20.1, 30.4);
 
     hyst.check();                                      // <--- sees sensor well within range
-    ASSERT_FALSE(switcH.state());
+    ASSERT_FALSE(switcH->state());
 }

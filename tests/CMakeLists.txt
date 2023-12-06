@@ -8,6 +8,8 @@ SET(FILES
   hysteresis-rises_above_range.cpp
   hysteresis-rises_above_range_when_on.cpp
   hysteresis-set-range.cpp
+
+  kochtopf-suite.cpp
 )
 
 IF (UNIX)
