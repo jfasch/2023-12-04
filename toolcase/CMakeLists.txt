@@ -2,6 +2,12 @@ set(FILES
 
   sensor-mock.h
   sensor-mock.cpp
+
+  switch-mock.h
+  switch-mock.cpp
+
+  hysteresis.h
+  hysteresis.cpp
 )
 
 IF (UNIX)
